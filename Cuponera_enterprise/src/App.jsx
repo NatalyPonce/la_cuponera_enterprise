@@ -1,14 +1,14 @@
-import { Header } from "./components/Header"
-import HomePage from "./components/homepage"
+import HomePage from "./components/homepage";
+import Header from "./components/header/Header";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
-
   return (
-    <>
-    <Header />
+    <BrowserRouter>
+      <Header />
       <HomePage />
-    </>
-  )
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
