@@ -1,9 +1,9 @@
 const fetchCategories = async () => {
-    const URL = import.meta.env.VITE_BASE_URL;
-    const TOKEN = import.meta.env.VITE_TOKEN_ADMIN;
+    const URL = "https://apiv1.lacuponera.store/api/v1/categories";
+    const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NDM3Mjk5NTIsImV4cCI6MTc0Mzc1MTU1Mn0.G53RlXtIbJ85U1VRmZAYkIlUnDMX_5oh1dAXMehG6c8";
 
     try {
-        const response = await fetch(`${URL}/categories`, {
+        const response = await fetch(`${URL}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${TOKEN}`,

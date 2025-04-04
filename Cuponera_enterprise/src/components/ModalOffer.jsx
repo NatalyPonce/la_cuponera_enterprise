@@ -23,14 +23,17 @@ const ModalOffer = ({ isOpen, onClose }) => {
     };
 
 
-  useEffect(() => {
-    const cargarCategorias = async () => {
-      const data = await fetchCategories();
-      if (data) setCategorias(data);
-      console.log(data);
-    };
-    cargarCategorias();
-  }, []);
+useEffect(() => {
+  const cargarCategorias = async () => {
+    const data = await fetchCategories();
+    if (data && data.categories) {
+      setCategorias(data.categories);
+      console.log(data.categories);
+    }
+  };
+  cargarCategorias();
+}, []);
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
