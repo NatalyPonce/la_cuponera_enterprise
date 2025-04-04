@@ -1,4 +1,4 @@
-import HomePage from "./components/homepage";
+import HomePage from "./components/Homepage";
 import Header from "./components/header/Header";
 import { BrowserRouter } from "react-router-dom";
 

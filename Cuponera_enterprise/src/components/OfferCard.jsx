@@ -2,6 +2,7 @@ import { useState } from "react";
 import fetchDiscardOffer from "../fetch/fetchDiscardOffer";
 import EditOfferModal from "../components/EditOfferModal";
 
+
 export const OfferCard = ({ offer, token }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedOffer, setSelectedOffer] = useState(null);
@@ -23,6 +24,22 @@ export const OfferCard = ({ offer, token }) => {
     setIsModalOpen(true);
   };
 
+  const getClassByStatus = (status) => {
+    switch (status) {
+      case "PENDING":
+        return "border-l-4 border-yellow-400 p-4 bg-yellow-50";
+      case "APPROVED":
+        return "border-l-4 border-green-500 p-4 bg-green-50";
+      case "REJECTED":
+        return "border-l-4 border-red-500 p-4 bg-red-50";
+      case "DISCARDED":
+        return "border-l-4 border-gray-400 p-4 bg-gray-100";
+      default:
+        return "border-l-4 border-blue-500 p-4 bg-white";
+    }
+  };
+  
+
   return (
     <div className={getClassByStatus(offer.offerState)}>
       <div className="flex items-center mb-4">
@@ -40,62 +57,64 @@ export const OfferCard = ({ offer, token }) => {
       </div>
 
       {offer.offerRejectedReason && (
+        <>
+          <p className="text-gray-600 italic mb-4">{offer.description}</p>
 
-      <p className="text-gray-600 italic mb-4">{offer.description}</p>
+          <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-gray-700">
+            <div>
+              <span className="font-medium text-gray-900">Estado:</span>{" "}
+              {offer.offerState}
+            </div>
+            <div>
+              <span className="font-medium text-gray-900">Precio Original:</span> $
+              {offer.originalPrice}
+            </div>
+            <div>
+              <span className="font-medium text-gray-900">Con Descuento:</span> $
+              {offer.discountPrice}
+            </div>
+            <div>
+              <span className="font-medium text-gray-900">Válido Desde:</span>{" "}
+              {new Date(offer.validFrom).toLocaleDateString()}
+            </div>
+            <div>
+              <span className="font-medium text-gray-900">Válido Hasta:</span>{" "}
+              {new Date(offer.validUntil).toLocaleDateString()}
+            </div>
+            <div>
+              <span className="font-medium text-gray-900">Cantidad Límite:</span>{" "}
+              {offer.quantityLimit}
+            </div>
+            <div>
+              <span className="font-medium text-gray-900">Vendidos:</span>{" "}
+              {offer.sold}
+            </div>
+            <div>
+              <span className="font-medium text-gray-900">Disponibles:</span>{" "}
+              {offer.quantityLimit - offer.sold}
+            </div>
+            <div className="col-span-2">
+              <span className="font-medium text-gray-900">Ingresos Totales:</span> $
+              {offer.discountPrice * offer.sold}
+            </div>
 
-      <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-gray-700">
-        <div>
-          <span className="font-medium text-gray-900">Estado:</span>{" "}
-          {offer.offerState}
-        </div>
-        <div>
-          <span className="font-medium text-gray-900">Precio Original:</span> $
-          {offer.originalPrice}
-        </div>
-        <div>
-          <span className="font-medium text-gray-900">Con Descuento:</span> $
-          {offer.discountPrice}
-        </div>
-        <div>
-          <span className="font-medium text-gray-900">Válido Desde:</span>{" "}
-          {new Date(offer.validFrom).toLocaleDateString()}
-        </div>
-        <div>
-          <span className="font-medium text-gray-900">Válido Hasta:</span>{" "}
-          {new Date(offer.validUntil).toLocaleDateString()}
-        </div>
-        <div>
-          <span className="font-medium text-gray-900">Cantidad Límite:</span>{" "}
-          {offer.quantityLimit}
-        </div>
-        <div>
-          <span className="font-medium text-gray-900">Vendidos:</span>{" "}
-          {offer.sold}
-        </div>
-        <div>
-          <span className="font-medium text-gray-900">Disponibles:</span>{" "}
-          {offer.quantityLimit - offer.sold}
-        </div>
-        <div className="col-span-2">
-          <span className="font-medium text-gray-900">Ingresos Totales:</span> $
-          {offer.discountPrice * offer.sold}
-        </div>
+            {offer.offerState !== "DISCARDED" && (
+              <div className="col-span-2">
+                <span className="font-medium text-gray-900">Cargo por servicio:</span>{" "}
+              </div>
+            )}
 
-        {offer.offerState !== "DISCARDED" && (
-          <div className="col-span-2">
-            <span className="font-medium text-gray-900">
-              Cargo por servicio:
-            </span>{" "}
+            {offer.offerRejectedReason && (
+              <div className="col-span-2 text-red-600">
+                <span className="font-medium">Razón de Rechazo:</span>{" "}
+                {offer.offerRejectedReason}
+              </div>
+            )}
           </div>
-        )}
+        </>
+      )}
 
-        {offer.offerRejectedReason && (
-          <div className="col-span-2 text-red-600">
-            <span className="font-medium">Razón de Rechazo:</span>{" "}
-            {offer.offerRejectedReason}
-          </div>
-        )}
-      </div>
+
       {offer.offerState === "PENDING" && (
         <div className="flex gap-4 mt-4">
           <button
