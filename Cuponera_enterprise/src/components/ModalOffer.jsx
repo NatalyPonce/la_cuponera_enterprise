@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import fetchCategories from "../fetch/fetchCategories";
 import fetchCreateOffer from "../fetch/fetchCreateOffer";
 
-const ModalOffer = ({ isOpen, onClose }) => {    
-    const [offerForm, setOfferForm] = useState({
+const ModalOffer = ({ isOpen, onClose }) => { 
+  const initialState = {
       title: "",
       description: "",
       originalPrice: 0,
@@ -12,7 +12,8 @@ const ModalOffer = ({ isOpen, onClose }) => {
       validUntil: "",
       quantityLimit: 0,
       categoryId: 0,
-    });
+    }   
+    const [offerForm, setOfferForm] = useState(initialState);
 
     const [categorias, setCategorias] = useState([]);
 
@@ -56,6 +57,7 @@ const handleSubmit = async (e) => {
   const response = await fetchCreateOffer(jsonOfferData);
   if (response) {
     console.log("Oferta creada con éxito:", response);
+    setOfferForm(initialState);
     onClose();
   } else {
     console.error("Hubo un error al crear la oferta");
@@ -65,12 +67,14 @@ const handleSubmit = async (e) => {
     if (!isOpen) return null;
 
     return (
-      <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center pointer-events-none">
+      <div className="absolute top-40 left-0 w-full h-full flex items-center justify-center pointer-events-none">
         <div className="absolute inset-0"></div>
 
-        <div className="relative z-10 bg-white p-6 rounded-lg shadow-lg w-96 pointer-events-auto">
+        <div className="relative z-10 bg-gray-100 p-6 rounded-lg shadow-lg w-96 pointer-events-auto">
           <form onSubmit={handleSubmit}>
-            <h2 className="text-xl font-bold mb-4">Crear oferta</h2>
+            <h2 className="text-xl font-bold mb-4 text-blue-950">
+              Crear oferta
+            </h2>
             <div className="mb-4">
               <label
                 className="block text-sm font-bold text-gray-700"
@@ -84,7 +88,7 @@ const handleSubmit = async (e) => {
                 name="title"
                 value={offerForm.title}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded"
+                className="w-full px-3 py-2 border border-gray-300 rounded placeholder-blue-900 text-blue-950"
                 placeholder="Ingresa el titulo de la oferta"
               />
             </div>
@@ -102,7 +106,7 @@ const handleSubmit = async (e) => {
                 name="description"
                 value={offerForm.description}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded"
+                className="w-full px-3 py-2 border border-gray-300 rounded placeholder-blue-900 text-blue-950"
                 placeholder="Ingresa la descripción de la oferta"
               />
             </div>
@@ -120,7 +124,7 @@ const handleSubmit = async (e) => {
                 name="originalPrice"
                 value={offerForm.originalPrice}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded"
+                className="w-full px-3 py-2 border border-gray-300 rounded placeholder-blue-800 text-blue-950"
                 placeholder="Ingresa el precio sin descuento de la oferta"
               />
             </div>
@@ -138,7 +142,7 @@ const handleSubmit = async (e) => {
                 name="discountPrice"
                 value={offerForm.discountPrice}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded"
+                className="w-full px-3 py-2 border border-gray-300 rounded placeholder-blue-800 text-blue-950"
                 placeholder="Ingresa el precio con descuento de la oferta"
               />
             </div>
@@ -156,7 +160,7 @@ const handleSubmit = async (e) => {
                 name="validFrom"
                 value={offerForm.validFrom}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded"
+                className="w-full px-3 py-2 border border-gray-300 rounded placeholder-blue-800 text-blue-950"
                 placeholder="Ingresa desde qué fecha será válido el cupón."
               />
             </div>
@@ -174,10 +178,11 @@ const handleSubmit = async (e) => {
                 name="validUntil"
                 value={offerForm.validUntil}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded"
+                className="w-full px-3 py-2 border border-gray-300 rounded placeholder-blue-800 text-blue-950"
                 placeholder="Ingresa hasta qué fecha será válido el cupón."
               />
             </div>
+
             <div className="mb-4">
               <label
                 className="block text-sm font-bold text-gray-700"
@@ -191,7 +196,7 @@ const handleSubmit = async (e) => {
                 name="quantityLimit"
                 value={offerForm.quantityLimit}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded"
+                className="w-full px-3 py-2 border border-gray-300 rounded placeholder-blue-800 text-blue-950"
                 placeholder="Ingresa la cantidad límite de ofertas"
               />
             </div>
@@ -208,7 +213,7 @@ const handleSubmit = async (e) => {
                 name="categoryId"
                 value={offerForm.categoryId}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded"
+                className="w-full px-3 py-2 border border-gray-300 rounded placeholder-blue-800 text-blue-950"
               >
                 <option value="">Selecciona una categoría</option>
                 {categorias.map((categoria) => (
@@ -218,20 +223,20 @@ const handleSubmit = async (e) => {
                 ))}
               </select>
             </div>
+
             <button
               type="submit"
               className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
             >
               Crear Oferta
             </button>
-          </form>
-
           <button
             onClick={onClose}
             className="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"
           >
             Cerrar
-          </button>
+            </button>
+          </form>
         </div>
       </div>
     );
