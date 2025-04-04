@@ -1,10 +1,9 @@
+import HomePage from "./components/homepage"
+
 function App() {
 
   return (
-    <div className="text-6xl underline">
-      Hola mundo
-    </div>
-
+    <HomePage />
   )
 }
 
