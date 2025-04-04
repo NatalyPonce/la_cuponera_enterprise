@@ -13,23 +13,63 @@ const HomePage = () => {
     "Ofertas descartadas",
   ];
   const [offers, setOffers] = useState([]);
-
   const [selectedCategorie, setSelectedCategorie] = useState("");
+  const [selectedOffers, setSelectedOffers] = useState([]);
 
-  const [selectedOffers, setSelectedOffers] = useState(offers)
+  const today = new Date();
 
-    useEffect(() => {
+  useEffect(() => {
     const loadOffers = async () => {
       const data = await fetchOfferEnterprise();
       if (data) {
         setOffers(data.offers);
+        setSelectedOffers(data.offers);
       }
     };
     loadOffers();
-    }, []);
-  const handleCategorieChange = () => {
-    
-  }
+  }, []);
+
+  const handleCategorieChange = (category) => {
+    setSelectedCategorie(category);
+
+    let filteredOffers = [...offers];
+
+    switch (category) {
+      case "Ofertas en espera de aprobación":
+        filteredOffers = offers.filter((offer) => offer.offerState === "PENDING");
+        break;
+      case "Ofertas aprobadas futuras":
+        filteredOffers = offers.filter(
+          (offer) =>
+            offer.offerState === "APPROVED" && new Date(offer.validFrom) > today
+        );
+        break;
+      case "Ofertas activas":
+        filteredOffers = offers.filter(
+          (offer) =>
+            offer.offerState === "APPROVED" &&
+            new Date(offer.validFrom) <= today &&
+            new Date(offer.validUntil) >= today
+        );
+        break;
+      case "Ofertas pasadas":
+        filteredOffers = offers.filter(
+          (offer) =>
+            offer.offerState === "APPROVED" && new Date(offer.validUntil) < today
+        );
+        break;
+      case "Ofertas rechazadas":
+        filteredOffers = offers.filter((offer) => offer.offerState === "REJECTED");
+        break;
+      case "Ofertas descartadas":
+        filteredOffers = offers.filter((offer) => offer.offerState === "DISCARDED");
+        break;
+      default:
+        filteredOffers = offers;
+    }
+
+    setSelectedOffers(filteredOffers);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 px-6 py-8">
@@ -40,21 +80,22 @@ const HomePage = () => {
           Aquí puedes ver tus ofertas:
         </h2>
 
-        {/* Dropdown */}
         <select
           value={selectedCategorie}
-          onChange={(e) => setSelectedCategorie(e.target.value)}
+          onChange={(e) => handleCategorieChange(e.target.value)}
           className="mt-1 md:mt-0 border border-gray-300 rounded-xl px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"
         >
           <option value="">Selecciona una categoría</option>
-          {categories.map((cat, idx) => (
-            <option key={idx} value={cat}>
-              {cat}
+          {categories.map((categorie, index) => (
+            <option key={index} value={categorie}>
+              {categorie}
             </option>
           ))}
         </select>
       </div>
-      {offers.map((oferta) => {
+
+      {/* Mostrar las ofertas filtradas */}
+      {selectedOffers.map((oferta) => {
         return <OfferCard offer={oferta} key={oferta.id} />;
       })}
     </div>
