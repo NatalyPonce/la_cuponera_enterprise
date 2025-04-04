@@ -1,9 +1,20 @@
+import { BrowserRouter, Routes, Route } from 'react-router';
 import HomePage from "./components/homepage"
+import Home from "./pages/Home";
+import Login from './pages/Login';
+
 
 function App() {
 
   return (
-    <HomePage />
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/home" element={<Home />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   )
 }
 
