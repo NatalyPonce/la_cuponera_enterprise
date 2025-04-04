@@ -31,9 +31,30 @@ export const OfferCard = ({ offer }) => {
         <strong>Vendidos:</strong> {offer.sold}
       </div>
 
+      <div>
+        <strong>Disponibles:</strong> {offer.quantityLimit-offer.sold}
+          </div>
+          
+    <div>
+        <strong>Ingresos totales:</strong> {offer.discountPrice*offer.sold}
+          </div>
+          
+    <div><strong>Cargo por servicio:</strong> </div>
+
       {offer.offerRejectedReason && (
         <div>
           <strong>Razón de Rechazo:</strong> {offer.offerRejectedReason}
+        </div>
+      )}
+
+      {offer.offerState === "PENDING" && (
+        <div className="flex gap-4 mt-4">
+          <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">
+            Editar y reenviar
+          </button>
+          <button className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600">
+            Descartar oferta
+          </button>
         </div>
       )}
     </div>
