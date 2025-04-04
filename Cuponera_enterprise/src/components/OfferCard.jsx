@@ -98,6 +98,19 @@ export const OfferCard = ({ offer }) => {
           </div>
         )}
       </div>
+      {offer.offerState === "PENDING" && (
+        <div className="flex justify-end gap-3 mt-6">
+          <button className="bg-blue-600 text-white py-2 px-4 rounded-xl hover:bg-blue-700 transition">
+            Editar y reenviar
+          </button>
+          <button
+            className="bg-red-500 text-white py-2 px-4 rounded-xl hover:bg-red-600 transition"
+            onClick={() => handleDiscardOnclick(offer)}
+          >
+            Descartar
+          </button>
+        </div>
+      )}
     </div>
   );
 };

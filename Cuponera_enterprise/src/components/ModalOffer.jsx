@@ -118,10 +118,10 @@ if (validUntilDate <= hoyDate) {
   if (!isOpen) return null;
 
   return (
-    <div className="absolute top-40 left-0 w-full h-full flex items-center justify-center pointer-events-none">
+    <div className="absolute top-100 left-0 w-full h-full flex items-center justify-center pointer-events-none">
       <div className="absolute inset-0"></div>
 
-      <div className="relative z-10 bg-gray-100 p-6 rounded-lg shadow-lg w-96 pointer-events-auto">
+      <div className="relative z-30 bg-gray-100 p-6 rounded-lg shadow-lg w-140 pointer-events-auto">
         <form onSubmit={handleSubmit}>
           <h2 className="text-xl font-bold mb-4 text-blue-950">Crear oferta</h2>
           <div className="mb-4">
@@ -256,13 +256,13 @@ if (validUntilDate <= hoyDate) {
 
           <button
             type="submit"
-            className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
+            className="mt-4 bg-sky-900 text-white px-4 py-2 rounded hover:bg-blue-950 m-4"
           >
             Crear Oferta
           </button>
           <button
             onClick={onClose}
-            className="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"
+            className="mt-4 bg-red-700 text-white px-4 py-2 rounded hover:bg-red-800 m-4"
           >
             Cerrar
           </button>
