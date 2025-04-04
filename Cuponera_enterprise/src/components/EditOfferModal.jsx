@@ -36,7 +36,7 @@ const EditOfferModal = ({ isOpen, onClose, offerData, token }) => {
 
     if (response) {
       console.log("Oferta actualizada:", response);
-      onClose(); // Cierra el modal
+      onClose();
     } else {
       console.error("Error al reenviar la oferta");
     }
@@ -106,7 +106,7 @@ const EditOfferModal = ({ isOpen, onClose, offerData, token }) => {
               type="date"
               name="validFrom"
               id="validFrom"
-              value={offerForm.validFrom.split("T")[0]} // formato para input date
+              value={offerForm.validFrom.split("T")[0]}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded"
             />

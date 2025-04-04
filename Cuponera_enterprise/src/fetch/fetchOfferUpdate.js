@@ -1,4 +1,3 @@
-// src/fetch/fetchUpdateOffer.js
 const fetchUpdateOffer = async (offerId, updatedData, token) => {
     try {
       const response = await fetch(
