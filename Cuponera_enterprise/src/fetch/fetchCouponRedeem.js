@@ -1,5 +1,5 @@
 const fetchCouponRedeem = async ({ couponCode, DUI }) => {
-  const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW50ZXJwcmlzZUlkIjoyLCJyb2xlIjoiZW50ZXJwcmlzZSIsImVtYWlsIjoibmFob21pQG5haG9taS5jb20iLCJpYXQiOjE3NDM4MDcxMjgsImV4cCI6MTc0MzgyODcyOH0.-0w-JLtl_He2D5prCkL5G6WjZXCNccImSKPkHdMRVAE";
+  const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW50ZXJwcmlzZUlkIjoyLCJyb2xlIjoiZW50ZXJwcmlzZSIsImVtYWlsIjoibmFob21pQG5haG9taS5jb20iLCJpYXQiOjE3NDM4MTA1MzYsImV4cCI6MTc0MzgzMjEzNn0.5PXpQdLuhB_JJ5_bwWHgU0rlVF4V00Y-_0Fh-LCnqo4";
   try {
     const response = await fetch(`https://apiv1.lacuponera.store/api/v1/coupons/${couponCode}/redeem`, {
       method: 'POST',
