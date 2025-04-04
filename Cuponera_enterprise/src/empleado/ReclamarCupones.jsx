@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ReclamarCuponDetalles from './ReclamarCuponDetalles';
-import fetchCouponRedeem from '../hooks/fetchCouponRedeem';
+import fetchCouponRedeem from '../fetch/fetchCouponRedeem';
 
 const ReclamarCupones = () => {
   const [codigoCupon, setCodigoCupon] = useState("");
@@ -71,7 +71,7 @@ const ReclamarCupones = () => {
 
             <div className="flex justify-center">
               <button
-                className="bg-primary text-white p-4 text-xl mt-4"
+                className="bg-black text-white p-4 text-xl mt-4"
                 onClick={handleRedimirCupon}
               >
                 Redimir Cupón

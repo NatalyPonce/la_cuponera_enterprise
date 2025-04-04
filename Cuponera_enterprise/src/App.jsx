@@ -1,12 +1,16 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./components/Homepage";
 import Header from "./components/header/Header";
-import { BrowserRouter } from "react-router-dom";
+import ReclamarCupones from "./empleado/ReclamarCupones";
 
 function App() {
   return (
     <BrowserRouter>
       <Header />
-      <HomePage />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/redeem" element={<ReclamarCupones />} />
+      </Routes>
     </BrowserRouter>
   );
 }
