@@ -94,7 +94,6 @@ const HomePage = () => {
       </div>
 
       <div className="flex flex-wrap justify-around items-center">
-        {/* Mostrar las ofertas filtradas */}
         {selectedOffers.map((oferta) => {
           return <OfferCard offer={oferta} key={oferta.id} />;
         })}

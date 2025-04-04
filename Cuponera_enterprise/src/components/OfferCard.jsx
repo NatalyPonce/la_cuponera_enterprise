@@ -1,7 +1,8 @@
+import { useState } from "react";
 import fetchDiscardOffer from "../fetch/fetchDiscardOffer";
+import EditOfferModal from "./EditOfferModal";
 
-const baseCardStyle =
-  "rounded-2xl shadow-lg p-6 max-w-md transition-transform transform hover:scale-[1.02] hover:shadow-xl m-5 border-2";
+const baseCardStyle ="rounded-2xl shadow-lg p-6 max-w-md transition-transform transform hover:scale-[1.02] hover:shadow-xl m-5 border-2";
 
 const classForPending = `${baseCardStyle} border-yellow-300 bg-yellow-50`;
 const classForApproved = `${baseCardStyle} border-green-300 bg-green-50`;
@@ -9,6 +10,7 @@ const classForRejected = `${baseCardStyle} border-red-300 bg-red-50`;
 const classForDiscarded = `${baseCardStyle} border-stone-300 bg-stone-100`;
 
 export const OfferCard = ({ offer }) => {
+    const [modalOpen, setModalOpen] = useState(false);
   const handleDiscardOnclick = async (offer) => {
     const discarded = confirm("¿Deseas descartar la oferta?");
     if (discarded) {
@@ -100,7 +102,8 @@ export const OfferCard = ({ offer }) => {
       </div>
       {offer.offerState === "PENDING" && (
         <div className="flex justify-end gap-3 mt-6">
-          <button className="bg-blue-600 text-white py-2 px-4 rounded-xl hover:bg-blue-700 transition">
+          <button className="bg-blue-600 text-white py-2 px-4 rounded-xl hover:bg-blue-700 transition"
+            onClick={() => setModalOpen(true)}>
             Editar y reenviar
           </button>
           <button
@@ -111,6 +114,7 @@ export const OfferCard = ({ offer }) => {
           </button>
         </div>
       )}
+      <EditOfferModal isOpen={modalOpen} offerData={offer} onClose={() => setModalOpen(false)} />
     </div>
   );
 };
