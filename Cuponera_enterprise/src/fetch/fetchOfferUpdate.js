@@ -1,7 +1,7 @@
 const fetchUpdateOffer = async (offerId, updatedData, token) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/v1/offers/enterprise/${offerId}`,
+        `https://apiv1.lacuponera.store/api/v1/offers/enterprise/${offerId}`,
         {
           method: "PATCH",
           headers: {
