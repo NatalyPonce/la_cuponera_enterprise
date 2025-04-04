@@ -24,33 +24,10 @@ export const OfferCard = ({ offer, token }) => {
   };
 
   return (
-    <div className="border border-gray-300 rounded-2xl shadow-md p-8 max-w-md bg-white m-5">
-      <h2 className="text-xl font-bold mb-4">{offer.title}</h2>
-      <div>
-        <strong>Estado:</strong> {offer.offerState}
-      </div>
-      <div>
-        <strong>Descripción:</strong> {offer.description}
-      </div>
-      <div>
-        <strong>Precio Original:</strong> ${offer.originalPrice}
-      </div>
-      <div>
-        <strong>Precio con Descuento:</strong> ${offer.discountPrice}
-      </div>
-      <div>
-        <strong>Válido Desde:</strong>{" "}
-        {new Date(offer.validFrom).toLocaleDateString()}
-      </div>
-      <div>
-        <strong>Válido Hasta:</strong>{" "}
-        {new Date(offer.validUntil).toLocaleDateString()}
-      </div>
-      <div>
-        <strong>Límite de Cantidad:</strong> {offer.quantityLimit}
-      </div>
-      <div>
-        <strong>Vendidos:</strong> {offer.sold}
+    <div className={getClassByStatus(offer.offerState)}>
+      <div className="flex items-center mb-4">
+        <img src="/coupon.png" alt="coupon" className="w-10 h-10 mr-3" />
+        <h2 className="text-2xl font-semibold text-gray-800">{offer.title}</h2>
       </div>
       <div>
         <strong>Disponibles:</strong> {offer.quantityLimit - offer.sold}
@@ -63,11 +40,62 @@ export const OfferCard = ({ offer, token }) => {
       </div>
 
       {offer.offerRejectedReason && (
-        <div>
-          <strong>Razón de Rechazo:</strong> {offer.offerRejectedReason}
-        </div>
-      )}
 
+      <p className="text-gray-600 italic mb-4">{offer.description}</p>
+
+      <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-gray-700">
+        <div>
+          <span className="font-medium text-gray-900">Estado:</span>{" "}
+          {offer.offerState}
+        </div>
+        <div>
+          <span className="font-medium text-gray-900">Precio Original:</span> $
+          {offer.originalPrice}
+        </div>
+        <div>
+          <span className="font-medium text-gray-900">Con Descuento:</span> $
+          {offer.discountPrice}
+        </div>
+        <div>
+          <span className="font-medium text-gray-900">Válido Desde:</span>{" "}
+          {new Date(offer.validFrom).toLocaleDateString()}
+        </div>
+        <div>
+          <span className="font-medium text-gray-900">Válido Hasta:</span>{" "}
+          {new Date(offer.validUntil).toLocaleDateString()}
+        </div>
+        <div>
+          <span className="font-medium text-gray-900">Cantidad Límite:</span>{" "}
+          {offer.quantityLimit}
+        </div>
+        <div>
+          <span className="font-medium text-gray-900">Vendidos:</span>{" "}
+          {offer.sold}
+        </div>
+        <div>
+          <span className="font-medium text-gray-900">Disponibles:</span>{" "}
+          {offer.quantityLimit - offer.sold}
+        </div>
+        <div className="col-span-2">
+          <span className="font-medium text-gray-900">Ingresos Totales:</span> $
+          {offer.discountPrice * offer.sold}
+        </div>
+
+        {offer.offerState !== "DISCARDED" && (
+          <div className="col-span-2">
+            <span className="font-medium text-gray-900">
+              Cargo por servicio:
+            </span>{" "}
+          </div>
+        )}
+
+        {offer.offerRejectedReason && (
+          <div className="col-span-2 text-red-600">
+            <span className="font-medium">Razón de Rechazo:</span>{" "}
+            {offer.offerRejectedReason}
+          </div>
+        )}
+      </div>
       {offer.offerState === "PENDING" && (
         <div className="flex gap-4 mt-4">
           <button
@@ -77,10 +105,10 @@ export const OfferCard = ({ offer, token }) => {
             Editar y reenviar
           </button>
           <button
-            className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600"
+            className="bg-red-500 text-white py-2 px-4 rounded-xl hover:bg-red-600 transition"
             onClick={() => handleDiscardOnclick(offer)}
           >
-            Descartar oferta
+            Descartar
           </button>
         </div>
       )}
