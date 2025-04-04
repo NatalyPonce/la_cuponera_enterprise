@@ -1,6 +1,11 @@
+import { useState } from "react";
 import fetchDiscardOffer from "../fetch/fetchDiscardOffer";
+import EditOfferModal from "../components/EditOfferModal";
 
-export const OfferCard = ({ offer }) => {
+export const OfferCard = ({ offer, token }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedOffer, setSelectedOffer] = useState(null);
+
   const handleDiscardOnclick = async (offer) => {
     const discarded = confirm("¿Deseas descartar la oferta?");
     if (discarded) {
@@ -12,7 +17,12 @@ export const OfferCard = ({ offer }) => {
       }
     }
   };
-  
+
+  const handleEditAndResend = (offer) => {
+    setSelectedOffer(offer);
+    setIsModalOpen(true);
+  };
+
   return (
     <div className="border border-gray-300 rounded-2xl shadow-md p-8 max-w-md bg-white m-5">
       <h2 className="text-xl font-bold mb-4">{offer.title}</h2>
@@ -42,15 +52,12 @@ export const OfferCard = ({ offer }) => {
       <div>
         <strong>Vendidos:</strong> {offer.sold}
       </div>
-
       <div>
         <strong>Disponibles:</strong> {offer.quantityLimit - offer.sold}
       </div>
-
       <div>
         <strong>Ingresos totales:</strong> {offer.discountPrice * offer.sold}
       </div>
-
       <div>
         <strong>Cargo por servicio:</strong>{" "}
       </div>
@@ -63,7 +70,10 @@ export const OfferCard = ({ offer }) => {
 
       {offer.offerState === "PENDING" && (
         <div className="flex gap-4 mt-4">
-          <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">
+          <button
+            className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
+            onClick={() => handleEditAndResend(offer)}
+          >
             Editar y reenviar
           </button>
           <button
@@ -74,6 +84,13 @@ export const OfferCard = ({ offer }) => {
           </button>
         </div>
       )}
+
+      <EditOfferModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        offerData={selectedOffer}
+        token={token}
+      />
     </div>
   );
 };

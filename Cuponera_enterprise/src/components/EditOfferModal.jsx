@@ -16,8 +16,8 @@ const EditOfferModal = ({ isOpen, onClose, offerData, token }) => {
       ...offerForm,
       [name]:
         name === "originalPrice" ||
-        name === "discountPrice" ||
-        name === "quantityLimit"
+          name === "discountPrice" ||
+          name === "quantityLimit"
           ? Number(value)
           : value,
     });
@@ -106,7 +106,7 @@ const EditOfferModal = ({ isOpen, onClose, offerData, token }) => {
               type="date"
               name="validFrom"
               id="validFrom"
-              value={offerForm.validFrom.split("T")[0]}
+              value={offerForm.validFrom ? offerForm.validFrom.split("T")[0] : ""}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded"
             />
@@ -118,11 +118,12 @@ const EditOfferModal = ({ isOpen, onClose, offerData, token }) => {
               type="date"
               name="validUntil"
               id="validUntil"
-              value={offerForm.validUntil.split("T")[0]}
+              value={offerForm.validUntil ? offerForm.validUntil.split("T")[0] : ""}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded"
             />
           </div>
+
 
           <div className="mb-4">
             <label htmlFor="quantityLimit" className="block text-sm font-bold text-gray-700">Cantidad límite</label>
