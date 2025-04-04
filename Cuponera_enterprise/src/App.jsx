@@ -1,12 +1,17 @@
 import HomePage from "./components/homepage";
 import Header from "./components/header/Header";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import LoginForm from "./components/LoginPage";
 
 function App() {
   return (
     <BrowserRouter>
-      <Header />
-      <HomePage />
+      <Routes>
+        <Route element={<Header />}>
+          <Route path="/" element={<LoginForm />} />
+          <Route path="/home" element={<HomePage />} />
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 }

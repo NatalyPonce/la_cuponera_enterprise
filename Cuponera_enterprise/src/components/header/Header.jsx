@@ -30,7 +30,6 @@ const Header = () => {
                 <div className="hidden md:flex space-x-4 items-center">
                     {isLoggedIn ? (
                         <>
-                            <UserMenu />
                             <div className="relative">
                                 <UserCircleIcon className="w-10 h-10 text-primary cursor-pointer" onClick={() => setMenuOpen(!menuOpen)} />
                                 {menuOpen && (
