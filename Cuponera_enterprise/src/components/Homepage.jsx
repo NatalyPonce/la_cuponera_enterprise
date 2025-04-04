@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import ModalOffer from "./ModalOffer";
 import fetchOfferEnterprise from "../fetch/fetchOfferEnterprise";
 import { OfferCard } from "./offerCard";
 
@@ -94,10 +93,12 @@ const HomePage = () => {
         </select>
       </div>
 
-      {/* Mostrar las ofertas filtradas */}
-      {selectedOffers.map((oferta) => {
-        return <OfferCard offer={oferta} key={oferta.id} />;
-      })}
+      <div className="flex flex-wrap justify-around items-center">
+        {/* Mostrar las ofertas filtradas */}
+        {selectedOffers.map((oferta) => {
+          return <OfferCard offer={oferta} key={oferta.id} />;
+        })}
+      </div>
     </div>
   );
 };

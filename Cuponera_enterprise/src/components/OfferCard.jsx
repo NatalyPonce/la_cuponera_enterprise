@@ -2,7 +2,7 @@ import React from "react";
 
 export const OfferCard = ({ offer }) => {
   return (
-    <div className="border border-gray-300 rounded-2xl shadow-md p-4 max-w-md bg-white">
+    <div className="border border-gray-300 rounded-2xl shadow-md p-8 max-w-md bg-white m-5">
       <h2 className="text-xl font-bold mb-4">{offer.title}</h2>
       <div>
         <strong>Estado:</strong> {offer.offerState}
