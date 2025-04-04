@@ -43,67 +43,61 @@ export const OfferCard = ({ offer }) => {
         <h2 className="text-2xl font-semibold text-gray-800">{offer.title}</h2>
       </div>
 
-      <div className="space-y-1 text-gray-700 text-sm">
-        <p>
-          <strong>Estado:</strong> {offer.offerState}
-        </p>
-        <p>
-          <strong>Descripción:</strong> {offer.description}
-        </p>
-        <p>
-          <strong>Precio Original:</strong> ${offer.originalPrice}
-        </p>
-        <p>
-          <strong>Precio con Descuento:</strong> ${offer.discountPrice}
-        </p>
-        <p>
-          <strong>Válido Desde:</strong>{" "}
+      <p className="text-gray-600 italic mb-4">{offer.description}</p>
+
+      <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-gray-700">
+        <div>
+          <span className="font-medium text-gray-900">Estado:</span>{" "}
+          {offer.offerState}
+        </div>
+        <div>
+          <span className="font-medium text-gray-900">Precio Original:</span> $
+          {offer.originalPrice}
+        </div>
+        <div>
+          <span className="font-medium text-gray-900">Con Descuento:</span> $
+          {offer.discountPrice}
+        </div>
+        <div>
+          <span className="font-medium text-gray-900">Válido Desde:</span>{" "}
           {new Date(offer.validFrom).toLocaleDateString()}
-        </p>
-        <p>
-          <strong>Válido Hasta:</strong>{" "}
+        </div>
+        <div>
+          <span className="font-medium text-gray-900">Válido Hasta:</span>{" "}
           {new Date(offer.validUntil).toLocaleDateString()}
-        </p>
-        <p>
-          <strong>Límite de Cantidad:</strong> {offer.quantityLimit}
-        </p>
-        <p>
-          <strong>Vendidos:</strong> {offer.sold}
-        </p>
-        <p>
-          <strong>Disponibles:</strong> {offer.quantityLimit - offer.sold}
-        </p>
-        <p>
-          <strong>Ingresos Totales:</strong> ${offer.discountPrice * offer.sold}
-        </p>
+        </div>
+        <div>
+          <span className="font-medium text-gray-900">Cantidad Límite:</span>{" "}
+          {offer.quantityLimit}
+        </div>
+        <div>
+          <span className="font-medium text-gray-900">Vendidos:</span>{" "}
+          {offer.sold}
+        </div>
+        <div>
+          <span className="font-medium text-gray-900">Disponibles:</span>{" "}
+          {offer.quantityLimit - offer.sold}
+        </div>
+        <div className="col-span-2">
+          <span className="font-medium text-gray-900">Ingresos Totales:</span> $
+          {offer.discountPrice * offer.sold}
+        </div>
 
         {offer.offerState !== "DISCARDED" && (
-          <p>
-            <strong>Cargo por servicio:</strong>{" "}
-            {/* Aquí puedes agregar el dato si lo tienes */}
-          </p>
+          <div className="col-span-2">
+            <span className="font-medium text-gray-900">
+              Cargo por servicio:
+            </span>{" "}
+          </div>
         )}
 
         {offer.offerRejectedReason && (
-          <p>
-            <strong>Razón de Rechazo:</strong> {offer.offerRejectedReason}
-          </p>
+          <div className="col-span-2 text-red-600">
+            <span className="font-medium">Razón de Rechazo:</span>{" "}
+            {offer.offerRejectedReason}
+          </div>
         )}
       </div>
-
-      {offer.offerState === "PENDING" && (
-        <div className="flex justify-end gap-3 mt-6">
-          <button className="bg-blue-600 text-white py-2 px-4 rounded-xl hover:bg-blue-700 transition">
-            Editar y reenviar
-          </button>
-          <button
-            className="bg-red-500 text-white py-2 px-4 rounded-xl hover:bg-red-600 transition"
-            onClick={() => handleDiscardOnclick(offer)}
-          >
-            Descartar
-          </button>
-        </div>
-      )}
     </div>
   );
 };
