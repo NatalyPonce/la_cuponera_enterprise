@@ -68,7 +68,7 @@ export const OfferCard = ({ offer }) => {
           </button>
           <button
             className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600"
-            onClick={handleDiscardOnclick(offer)}
+            onClick={() => handleDiscardOnclick(offer)}
           >
             Descartar oferta
           </button>
