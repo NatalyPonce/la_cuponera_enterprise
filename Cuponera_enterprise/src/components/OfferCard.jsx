@@ -95,7 +95,7 @@ export const OfferCard = ({ offer, token }) => {
         )}
       </div>
 
-      {offer.offerState === "PENDING" && (
+      {offer.offerState === "REJECTED" && (
         <div className="flex justify-end gap-3 mt-6">
           <button className="bg-blue-600 text-white py-2 px-4 rounded-xl hover:bg-blue-700 transition" onClick={() => handleEditAndResend(offer)}>
             Editar y reenviar

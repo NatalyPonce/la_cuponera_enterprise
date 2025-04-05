@@ -82,10 +82,15 @@ const EditOfferModal = ({ isOpen, onClose, offerData, token }) => {
       <div className="relative z-10 bg-white p-6 rounded-lg shadow-lg w-96 pointer-events-auto">
         <h2 className="text-xl font-bold mb-4">Editar y reenviar oferta</h2>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="flex flex-wrap gap-4">
           {/* Título */}
-          <div className="mb-4">
-            <label htmlFor="title" className="block text-sm font-bold text-gray-700">Título</label>
+          <div className="w-full md:w-[calc(50%-0.5rem)]">
+            <label
+              htmlFor="title"
+              className="block text-sm font-bold text-gray-700"
+            >
+              Título
+            </label>
             <input
               type="text"
               name="title"
@@ -94,12 +99,19 @@ const EditOfferModal = ({ isOpen, onClose, offerData, token }) => {
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded"
             />
-            {errors.title && <p className="text-red-500 text-sm">{errors.title}</p>}
+            {errors.title && (
+              <p className="text-red-500 text-sm">{errors.title}</p>
+            )}
           </div>
 
           {/* Descripción */}
-          <div className="mb-4">
-            <label htmlFor="description" className="block text-sm font-bold text-gray-700">Descripción</label>
+          <div className="w-full md:w-[calc(50%-0.5rem)]">
+            <label
+              htmlFor="description"
+              className="block text-sm font-bold text-gray-700"
+            >
+              Descripción
+            </label>
             <input
               type="text"
               name="description"
@@ -108,12 +120,19 @@ const EditOfferModal = ({ isOpen, onClose, offerData, token }) => {
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded"
             />
-            {errors.description && <p className="text-red-500 text-sm">{errors.description}</p>}
+            {errors.description && (
+              <p className="text-red-500 text-sm">{errors.description}</p>
+            )}
           </div>
 
           {/* Precio sin descuento */}
-          <div className="mb-4">
-            <label htmlFor="originalPrice" className="block text-sm font-bold text-gray-700">Precio sin descuento</label>
+          <div className="w-full md:w-[calc(50%-0.5rem)]">
+            <label
+              htmlFor="originalPrice"
+              className="block text-sm font-bold text-gray-700"
+            >
+              Precio sin descuento
+            </label>
             <input
               type="number"
               name="originalPrice"
@@ -122,12 +141,19 @@ const EditOfferModal = ({ isOpen, onClose, offerData, token }) => {
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded"
             />
-            {errors.originalPrice && <p className="text-red-500 text-sm">{errors.originalPrice}</p>}
+            {errors.originalPrice && (
+              <p className="text-red-500 text-sm">{errors.originalPrice}</p>
+            )}
           </div>
 
           {/* Precio con descuento */}
-          <div className="mb-4">
-            <label htmlFor="discountPrice" className="block text-sm font-bold text-gray-700">Precio con descuento</label>
+          <div className="w-full md:w-[calc(50%-0.5rem)]">
+            <label
+              htmlFor="discountPrice"
+              className="block text-sm font-bold text-gray-700"
+            >
+              Precio con descuento
+            </label>
             <input
               type="number"
               name="discountPrice"
@@ -136,40 +162,65 @@ const EditOfferModal = ({ isOpen, onClose, offerData, token }) => {
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded"
             />
-            {errors.discountPrice && <p className="text-red-500 text-sm">{errors.discountPrice}</p>}
+            {errors.discountPrice && (
+              <p className="text-red-500 text-sm">{errors.discountPrice}</p>
+            )}
           </div>
 
           {/* Fecha inicio */}
-          <div className="mb-4">
-            <label htmlFor="validFrom" className="block text-sm font-bold text-gray-700">Válido desde</label>
+          <div className="w-full md:w-[calc(50%-0.5rem)]">
+            <label
+              htmlFor="validFrom"
+              className="block text-sm font-bold text-gray-700"
+            >
+              Válido desde
+            </label>
             <input
               type="date"
               name="validFrom"
               id="validFrom"
-              value={offerForm.validFrom ? offerForm.validFrom.split("T")[0] : ""}
+              value={
+                offerForm.validFrom ? offerForm.validFrom.split("T")[0] : ""
+              }
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded"
             />
-            {errors.validFrom && <p className="text-red-500 text-sm">{errors.validFrom}</p>}
+            {errors.validFrom && (
+              <p className="text-red-500 text-sm">{errors.validFrom}</p>
+            )}
           </div>
 
           {/* Fecha fin */}
-          <div className="mb-4">
-            <label htmlFor="validUntil" className="block text-sm font-bold text-gray-700">Válido hasta</label>
+          <div className="w-full md:w-[calc(50%-0.5rem)]">
+            <label
+              htmlFor="validUntil"
+              className="block text-sm font-bold text-gray-700"
+            >
+              Válido hasta
+            </label>
             <input
               type="date"
               name="validUntil"
               id="validUntil"
-              value={offerForm.validUntil ? offerForm.validUntil.split("T")[0] : ""}
+              value={
+                offerForm.validUntil ? offerForm.validUntil.split("T")[0] : ""
+              }
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded"
             />
-            {errors.validUntil && <p className="text-red-500 text-sm">{errors.validUntil}</p>}
+            {errors.validUntil && (
+              <p className="text-red-500 text-sm">{errors.validUntil}</p>
+            )}
           </div>
 
           {/* Cantidad límite */}
-          <div className="mb-4">
-            <label htmlFor="quantityLimit" className="block text-sm font-bold text-gray-700">Cantidad límite</label>
+          <div className="w-full md:w-[calc(50%-0.5rem)]">
+            <label
+              htmlFor="quantityLimit"
+              className="block text-sm font-bold text-gray-700"
+            >
+              Cantidad límite
+            </label>
             <input
               type="number"
               name="quantityLimit"
@@ -178,15 +229,19 @@ const EditOfferModal = ({ isOpen, onClose, offerData, token }) => {
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded"
             />
-            {errors.quantityLimit && <p className="text-red-500 text-sm">{errors.quantityLimit}</p>}
+            {errors.quantityLimit && (
+              <p className="text-red-500 text-sm">{errors.quantityLimit}</p>
+            )}
           </div>
 
-          <button
-            type="submit"
-            className="mt-2 w-full bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-          >
-            Reenviar oferta
-          </button>
+          <div className="w-full">
+            <button
+              type="submit"
+              className="mt-2 w-full bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+            >
+              Reenviar oferta
+            </button>
+          </div>
         </form>
 
         <button
