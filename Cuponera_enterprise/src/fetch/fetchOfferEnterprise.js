@@ -1,11 +1,10 @@
 const fetchOfferEnterprise = async () => {
     const URL = "https://apiv1.lacuponera.store/api/v1/offers/enterprise";
-    const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW50ZXJwcmlzZUlkIjoyLCJyb2xlIjoiZW50ZXJwcmlzZSIsImVtYWlsIjoibmFob21pQG5haG9taS5jb20iLCJpYXQiOjE3NDM3Nzk5NjcsImV4cCI6MTc0MzgwMTU2N30.YBPSgZBYpskG36g2Fvo9gmBpeJuMhbaiamTRiF7sunA";
     try {
         const response = await fetch(`${URL}`, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${TOKEN}`,
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 'Content-Type': 'application/json'
             }
         });
