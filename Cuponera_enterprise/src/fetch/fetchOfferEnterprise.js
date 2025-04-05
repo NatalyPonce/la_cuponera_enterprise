@@ -5,7 +5,7 @@ const fetchOfferEnterprise = async () => {
         const response = await fetch(`${URL}`, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${TOKEN}`,
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 'Content-Type': 'application/json'
             }
         });
