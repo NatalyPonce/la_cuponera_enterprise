@@ -6,10 +6,15 @@ import ReclamarCupones from "./empleado/ReclamarCupones";
 function App() {
   return (
     <BrowserRouter>
-      <Header />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/redeem" element={<ReclamarCupones />} />
+        <Route path="/" element={<Header/>}>
+          <Route path="/home" element={<HomePage/>}/>
+
+          <Route path="/gestionEmpleado" element={<HomePage/>}/>
+          <Route path="/redeem" element={<ReclamarCupones/>}/>
+
+        </Route>
+        
       </Routes>
     </BrowserRouter>
   );
